@@ -111,16 +111,16 @@ public:               // interface available to code outside the class
         return count == N * N;// will return if 81 cells are read
     }
 
-    void print() const {                             // print the grid in a readable layout
-        for (int r = 0; r < N; r++) {                // go row by row
+    void print() const {// print the grid in a readable layout
+        for (int r = 0; r < N; r++) {    // go row by row
             if (r > 0 && r % 3 == 0) cout << "------+-------+------" << endl;  // horizontal divider between blocks
-            for (int c = 0; c < N; c++) {            // go column by column
+            for (int c = 0; c < N; c++) { // go col by col
                 if (c > 0 && c % 3 == 0) cout << "| ";  // vertical divider between blocks
                 if (grid[r][c] == 0) cout << "_";    // show empty cells as an underscore
-                else cout << grid[r][c];             // show filled cells as their digit
-                if (c < N - 1) cout << " ";          // space between cells (none after the last one)
+                else cout << grid[r][c];  // show filled cells as their digit
+                if (c < N - 1) cout << " ";// space between cells (none after the last one)
             }
-            cout << endl;                            // end of this row
+            cout << endl;// end of this row
         }
     }
 
