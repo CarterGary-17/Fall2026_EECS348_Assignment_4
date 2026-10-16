@@ -23,6 +23,7 @@ It then sovles every posiible combination and prints all possible solution
 #include <iostream>// cout endl these for printing
 #include <fstream> // ifstream for reading 
 #include <string>// string for building file 
+#include <cctype> //
 using namespace std;// makes it simplier dont need ::cout
 
 class Sudoku { // the sudoku object this is the one loaded and being solved
@@ -101,12 +102,21 @@ public:               // interface available to code outside the class
         int count = 0;  // cell count
         char ch; // the last charater
         while (count < N * N && in.get(ch)) {  // read until 81 cells
-            if (ch >= '1' && ch <= '9')  // a digit if assignd
-                grid[count / N][count % N] = ch - '0', count++;  // store its numeric val then move
-            else if (ch == '_' || ch == '0' || ch == '.') // mark the a blank cell
-                grid[count / N][count % N] = 0, count++;// make it a 0 then move
-            // the rest of the doc is ignored
-        }
+            if (ch >= '1' && ch <= '9') { // a digit if assignd
+                grid[count / N][count % N] = ch - '0';
+                 count++; 
+            } // store its numeric val then move
+            else if (ch == '_' || ch == '0' || ch == '.') {// mark the a blank cell
+                grid[count / N][count % N] = 0;
+                count++;// make it a 0 then move
+            }
+            else if (isspace(static_cast<unsigned char>(ch))) {
+    // whitespace between cells is fine, so do nothing
+            }
+            else {
+                return false;  // any other character means the file is not a valid puzzle
+            }
+        } 
         solutionCount = 0;// new puzzle count
         return count == N * N;// will return if 81 cells are read
     }
